@@ -153,12 +153,12 @@ export default function InteractiveLovePage() {
 
       {kiss && (
         <p style={styles.text}>
-          True Love is in the Air! 💕 <FaHeart />
+          Habiba is kissing Habib! 💕
         </p>
       )}
-      
+
       <button onClick={handleKiss} style={styles.button}>
-        Send a Kiss <FaHeart style={{ marginLeft: '10px' }} />
+        Send a Kiss <FaHeart style={{ marginLeft: '30px' }} />
       </button>
       
 
