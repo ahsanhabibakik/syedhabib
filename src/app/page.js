@@ -12,57 +12,58 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: '100vh',
+    height: '100vh', // Full screen height
+    width: '100vw',  // Full screen width
+    overflow: 'hidden', // No scrolling
     background: 'linear-gradient(135deg, #3a3a3a 0%, #4e4e4e 100%)',
     fontFamily: '"Dancing Script", cursive',
+    padding: '0',
+    margin: '0',
+    position: 'relative',
   },
   text: {
-    fontSize: '36px',
+    fontSize: '32px',
     fontFamily: '"Lobster", cursive',
     color: '#ffffff',
-    marginBottom: '30px',
     textAlign: 'center',
     textShadow: '1px 1px 3px rgba(0,0,0,0.4)',
+    minHeight: '40px',  // Keep text height fixed to prevent shifting
   },
   animationContainer: {
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'space-between',  // Space out the boy and girl
+    alignItems: 'flex-end',  // Align images bottom for consistency
+    width: '100%',
+    maxWidth: '600px',  // Ensure the container is not too wide
     position: 'relative',
-    width: '400px',
-    height: '250px',
-    marginBottom: '40px',
+    padding: '20px', // Adjusted for better spacing
   },
   boy: {
-    position: 'absolute',
-    left: '5%',
     width: '120px',
     height: '160px',
+    marginLeft: '10px',
+    marginBottom: '20px',  // Create spacing from the bottom
   },
   boyName: {
-    position: 'absolute',
-    left: '5%',
-    top: '170px',
     fontSize: '18px',
     fontFamily: '"Lobster", cursive',
     color: '#ffffff',
     textAlign: 'center',
+    marginTop: '10px',
   },
   girl: {
-    position: 'absolute',
-    right: '5%',
     width: '120px',
     height: '160px',
+    marginRight: '10px',
+    marginBottom: '20px',  // Create spacing from the bottom
     transformOrigin: 'bottom left',
   },
   girlName: {
-    position: 'absolute',
-    right: '5%',
-    top: '170px',
     fontSize: '18px',
     fontFamily: '"Lobster", cursive',
     color: '#ffffff',
     textAlign: 'center',
+    marginTop: '10px',
   },
   button: {
     padding: '16px 40px',
@@ -75,6 +76,7 @@ const styles = {
     transition: 'background-color 0.3s ease',
     boxShadow: '0px 4px 8px rgba(0,0,0,0.2)',
     marginTop: '20px',
+    position: 'relative', // Fix button position, won't shift
   },
   hearts: {
     position: 'absolute',
@@ -102,7 +104,7 @@ export default function InteractiveLovePage() {
 
   // Kiss sound effect
   const playKissSound = () => {
-    const kissAudio = new Audio('/kiss-sound.wav'); // Add the kiss sound file to your public folder
+    const kissAudio = new Audio('/kiss-sound.wav'); // Add kiss sound file to public folder
     kissAudio.play();
   };
 
@@ -128,28 +130,32 @@ export default function InteractiveLovePage() {
 
   // Personalized message for each kiss count
   const getKissMessage = () => {
-    if (kissCount === 0) return 'Send a Kiss to Akik!';
-    if (kissCount === 1) return 'One Kiss to Akik 💕';
-    if (kissCount === 2) return 'Two Kisses to Akik 💖';
-    if (kissCount === 3) return 'Three Kisses to Akik 💘';
-    if (kissCount >= 4) return `${kissCount} Kisses to Akik 💞`;
+    if (kissCount === 0) return 'Send a Kiss to Habib!';
+    if (kissCount === 1) return 'One Kiss to Habib 💕';
+    if (kissCount === 2) return 'Two Kisses to Habib 💖';
+    if (kissCount === 3) return 'Three Kisses to Habib 💘';
+    if (kissCount >= 4) return `${kissCount} Kisses to Habib 💞`;
   };
 
   return (
     <div style={styles.container}>
       <h1 style={styles.text}>{getKissMessage()}</h1>
       <div style={styles.animationContainer}>
-        <img src="/boy.png" alt="Boy" style={styles.boy} />
-        <p style={styles.boyName}>Habib</p> {/* Boy's Name */}
-        <animated.img src="/girl.png" alt="Girl" style={{ ...styles.girl, ...girlSpring }} />
-        <p style={styles.girlName}>Habiba</p> {/* Girl's Name */}
+        <div>
+          <img src="/boy.png" alt="Boy" style={styles.boy} />
+          <p style={styles.boyName}>Habib</p> {/* Boy's Name */}
+        </div>
+        <div>
+          <animated.img src="/girl.png" alt="Girl" style={{ ...styles.girl, ...girlSpring }} />
+          <p style={styles.girlName}>Habiba</p> {/* Girl's Name */}
+        </div>
       </div>
       <button onClick={handleKiss} style={styles.button}>
         Send a Kiss <FaHeart style={{ marginLeft: '10px' }} />
       </button>
       {kiss && (
         <p style={styles.text}>
-          Smooch! <FaHeart /> <br /> True Love is in the Air! 💕
+          True Love is in the Air! 💕 <FaHeart />
         </p>
       )}
 
