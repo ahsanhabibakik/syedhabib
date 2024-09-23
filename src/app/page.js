@@ -77,7 +77,7 @@ export default function InteractiveLovePage() {
 
   // Kiss sound effect
   const playKissSound = () => {
-    const kissAudio = new Audio('/kiss-sound.mp3'); // Add the kiss sound file to your public folder
+    const kissAudio = new Audio('/kiss-sound.wav'); // Add the kiss sound file to your public folder
     kissAudio.play();
   };
 
@@ -128,7 +128,7 @@ export default function InteractiveLovePage() {
       )}
 
       {/* Audio element for kiss sound */}
-      <audio id="kiss-sound" src="/kiss-sound.mp3" preload="auto" />
+      <audio id="kiss-sound" src="/kiss-sound.wav" preload="auto" />
     </div>
   );
 }
