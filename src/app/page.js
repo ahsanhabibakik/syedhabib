@@ -13,47 +13,50 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '100vh',
-    background: 'linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)',
+    background: 'linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)', // Softer gradient
     fontFamily: '"Dancing Script", cursive',
   },
   text: {
-    fontSize: '32px',
+    fontSize: '36px', // Larger for better visibility
     fontFamily: '"Lobster", cursive',
-    color: '#ff69b4',
-    marginBottom: '20px',
+    color: '#ff4d88', // Improved contrast for readability
+    marginBottom: '30px',
     textAlign: 'center',
+    textShadow: '1px 1px 3px rgba(0,0,0,0.2)', // Added subtle shadow for depth
   },
   animationContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    width: '300px',
-    height: '200px',
-    marginBottom: '20px',
+    width: '400px', // Increased size for prominence
+    height: '250px',
+    marginBottom: '40px',
   },
   boy: {
     position: 'absolute',
-    left: '10px',
-    width: '100px',
-    height: '150px',
+    left: '5%',
+    width: '120px',
+    height: '160px',
   },
   girl: {
     position: 'absolute',
-    right: '10px',
-    width: '100px',
-    height: '150px',
+    right: '5%',
+    width: '120px',
+    height: '160px',
     transformOrigin: 'bottom left',
   },
   button: {
-    padding: '12px 24px',
-    backgroundColor: '#f08080',
+    padding: '16px 40px',
+    background: 'linear-gradient(45deg, #ff6f91, #ff9671)', // Gradient for modern look
     color: 'white',
     border: 'none',
     borderRadius: '30px',
     cursor: 'pointer',
-    fontSize: '18px',
+    fontSize: '20px',
     transition: 'background-color 0.3s ease',
+    boxShadow: '0px 4px 8px rgba(0,0,0,0.2)', // Adds depth
+    marginTop: '20px',
   },
   hearts: {
     position: 'absolute',
@@ -94,7 +97,7 @@ export default function InteractiveLovePage() {
     5,
     new Array(5).fill().map(() => ({
       from: { transform: 'translateY(100px)', opacity: 1 },
-      to: { transform: 'translateY(-150px)', opacity: 0 },
+      to: { transform: 'translateY(-180px)', opacity: 0 },
       config: { duration: 2000 },
       reset: heartsVisible,
     }))
@@ -121,7 +124,7 @@ export default function InteractiveLovePage() {
         <div style={styles.hearts}>
           {heartSprings.map((spring, i) => (
             <animated.div key={i} style={{ ...spring }}>
-              <FaHeart style={{ color: '#ff69b4', fontSize: '24px' }} />
+              <FaHeart style={{ color: '#ff4d88', fontSize: '28px' }} /> {/* Larger hearts */}
             </animated.div>
           ))}
         </div>
