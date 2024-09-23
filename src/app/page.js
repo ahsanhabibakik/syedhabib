@@ -13,23 +13,23 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '100vh',
-    background: 'linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)', // Softer gradient
+    background: 'linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)',
     fontFamily: '"Dancing Script", cursive',
   },
   text: {
-    fontSize: '36px', // Larger for better visibility
+    fontSize: '36px',
     fontFamily: '"Lobster", cursive',
-    color: '#ff4d88', // Improved contrast for readability
+    color: '#ff4d88',
     marginBottom: '30px',
     textAlign: 'center',
-    textShadow: '1px 1px 3px rgba(0,0,0,0.2)', // Added subtle shadow for depth
+    textShadow: '1px 1px 3px rgba(0,0,0,0.2)',
   },
   animationContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
-    width: '400px', // Increased size for prominence
+    width: '400px',
     height: '250px',
     marginBottom: '40px',
   },
@@ -48,14 +48,14 @@ const styles = {
   },
   button: {
     padding: '16px 40px',
-    background: 'linear-gradient(45deg, #ff6f91, #ff9671)', // Gradient for modern look
+    background: 'linear-gradient(45deg, #ff6f91, #ff9671)',
     color: 'white',
     border: 'none',
     borderRadius: '30px',
     cursor: 'pointer',
     fontSize: '20px',
     transition: 'background-color 0.3s ease',
-    boxShadow: '0px 4px 8px rgba(0,0,0,0.2)', // Adds depth
+    boxShadow: '0px 4px 8px rgba(0,0,0,0.2)',
     marginTop: '20px',
   },
   hearts: {
@@ -71,6 +71,7 @@ const styles = {
 export default function InteractiveLovePage() {
   const [kiss, setKiss] = useState(false);
   const [heartsVisible, setHeartsVisible] = useState(false);
+  const [kissCount, setKissCount] = useState(0); // Kiss counter
 
   // Animation for the girl moving in to kiss
   const girlSpring = useSpring({
@@ -87,6 +88,7 @@ export default function InteractiveLovePage() {
   // Handle the kiss action
   const handleKiss = () => {
     setKiss(!kiss);
+    setKissCount(kissCount + 1); // Increment kiss count
     setHeartsVisible(true);
     playKissSound();
     setTimeout(() => setHeartsVisible(false), 2000); // Hide hearts after 2 seconds
@@ -103,9 +105,18 @@ export default function InteractiveLovePage() {
     }))
   );
 
+  // Personalized message for each kiss count
+  const getKissMessage = () => {
+    if (kissCount === 0) return 'Send a Kiss to Akik!';
+    if (kissCount === 1) return 'One Kiss to Akik 💕';
+    if (kissCount === 2) return 'Two Kisses to Akik 💖';
+    if (kissCount === 3) return 'Three Kisses to Akik 💘';
+    if (kissCount >= 4) return `${kissCount} Kisses to Akik 💞`;
+  };
+
   return (
     <div style={styles.container}>
-      <h1 style={styles.text}>You Make My Heart Skip a Beat</h1>
+      <h1 style={styles.text}>{getKissMessage()}</h1>
       <div style={styles.animationContainer}>
         <img src="/boy.png" alt="Boy" style={styles.boy} />
         <animated.img src="/girl.png" alt="Girl" style={{ ...styles.girl, ...girlSpring }} />
@@ -115,7 +126,7 @@ export default function InteractiveLovePage() {
       </button>
       {kiss && (
         <p style={styles.text}>
-          Smooch! <FaHeart /> <br /> True Love Always Wins! 💕
+          Smooch! <FaHeart /> <br /> True Love is in the Air! 💕
         </p>
       )}
 
@@ -124,7 +135,7 @@ export default function InteractiveLovePage() {
         <div style={styles.hearts}>
           {heartSprings.map((spring, i) => (
             <animated.div key={i} style={{ ...spring }}>
-              <FaHeart style={{ color: '#ff4d88', fontSize: '28px' }} /> {/* Larger hearts */}
+              <FaHeart style={{ color: '#ff4d88', fontSize: '28px' }} />
             </animated.div>
           ))}
         </div>
