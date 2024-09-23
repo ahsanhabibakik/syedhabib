@@ -13,16 +13,16 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '100vh',
-    background: 'linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)',
+    background: 'linear-gradient(135deg, #3a3a3a 0%, #4e4e4e 100%)',
     fontFamily: '"Dancing Script", cursive',
   },
   text: {
     fontSize: '36px',
     fontFamily: '"Lobster", cursive',
-    color: '#ff4d88',
+    color: '#ffffff',
     marginBottom: '30px',
     textAlign: 'center',
-    textShadow: '1px 1px 3px rgba(0,0,0,0.2)',
+    textShadow: '1px 1px 3px rgba(0,0,0,0.4)',
   },
   animationContainer: {
     display: 'flex',
@@ -39,6 +39,15 @@ const styles = {
     width: '120px',
     height: '160px',
   },
+  boyName: {
+    position: 'absolute',
+    left: '5%',
+    top: '170px',
+    fontSize: '18px',
+    fontFamily: '"Lobster", cursive',
+    color: '#ffffff',
+    textAlign: 'center',
+  },
   girl: {
     position: 'absolute',
     right: '5%',
@@ -46,9 +55,18 @@ const styles = {
     height: '160px',
     transformOrigin: 'bottom left',
   },
+  girlName: {
+    position: 'absolute',
+    right: '5%',
+    top: '170px',
+    fontSize: '18px',
+    fontFamily: '"Lobster", cursive',
+    color: '#ffffff',
+    textAlign: 'center',
+  },
   button: {
     padding: '16px 40px',
-    background: 'linear-gradient(45deg, #ff6f91, #ff9671)',
+    background: 'linear-gradient(45deg, #348f50, #56b4d3)',
     color: 'white',
     border: 'none',
     borderRadius: '30px',
@@ -73,10 +91,13 @@ export default function InteractiveLovePage() {
   const [heartsVisible, setHeartsVisible] = useState(false);
   const [kissCount, setKissCount] = useState(0); // Kiss counter
 
-  // Animation for the girl moving in to kiss
+  // Animation for the girl moving in to kiss and return
   const girlSpring = useSpring({
-    transform: kiss ? 'translateX(-50px) rotate(-10deg)' : 'translateX(0) rotate(0)',
+    transform: kiss
+      ? 'translateX(-50px) rotate(-10deg)' // Lean towards the boy
+      : 'translateX(0) rotate(0)', // Return to original position
     config: { tension: 200, friction: 12 },
+    onRest: () => setKiss(false), // Reset kiss state after animation completes
   });
 
   // Kiss sound effect
@@ -87,7 +108,7 @@ export default function InteractiveLovePage() {
 
   // Handle the kiss action
   const handleKiss = () => {
-    setKiss(!kiss);
+    setKiss(true);
     setKissCount(kissCount + 1); // Increment kiss count
     setHeartsVisible(true);
     playKissSound();
@@ -119,7 +140,9 @@ export default function InteractiveLovePage() {
       <h1 style={styles.text}>{getKissMessage()}</h1>
       <div style={styles.animationContainer}>
         <img src="/boy.png" alt="Boy" style={styles.boy} />
+        <p style={styles.boyName}>Habib</p> {/* Boy's Name */}
         <animated.img src="/girl.png" alt="Girl" style={{ ...styles.girl, ...girlSpring }} />
+        <p style={styles.girlName}>Habiba</p> {/* Girl's Name */}
       </div>
       <button onClick={handleKiss} style={styles.button}>
         Send a Kiss <FaHeart style={{ marginLeft: '10px' }} />
