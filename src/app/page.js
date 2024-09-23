@@ -150,14 +150,17 @@ export default function InteractiveLovePage() {
           <p style={styles.girlName}>Habiba</p> {/* Girl's Name */}
         </div>
       </div>
-      <button onClick={handleKiss} style={styles.button}>
-        Send a Kiss <FaHeart style={{ marginLeft: '10px' }} />
-      </button>
+
       {kiss && (
         <p style={styles.text}>
           True Love is in the Air! 💕 <FaHeart />
         </p>
       )}
+      
+      <button onClick={handleKiss} style={styles.button}>
+        Send a Kiss <FaHeart style={{ marginLeft: '10px' }} />
+      </button>
+      
 
       {/* Floating hearts */}
       {heartsVisible && (
