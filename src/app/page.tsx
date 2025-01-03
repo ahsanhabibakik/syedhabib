@@ -44,7 +44,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center py-20 text-center bg-gradient-to-br from-[#2a4365] to-[#4e73df]">
         <h1 className="text-5xl font-bold mb-4">Welcome to My Personal Website</h1>
-        <p className="text-xl mb-8">I'm Syed Mir Ahsan Habib, a passionate web developer, entrepreneur, and lifelong learner.</p>
+        <p className="text-xl mb-8">I&rsquo;m Syed Mir Ahsan Habib, a passionate web developer, entrepreneur, and lifelong learner.</p>
         <a href="#contact" className="px-6 py-3 bg-yellow-400 text-gray-900 rounded-full text-lg hover:bg-yellow-500 transition-all">
           Contact Me
         </a>
@@ -55,7 +55,7 @@ export default function Home() {
         <div className="max-w-screen-xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-semibold mb-6">About Me</h2>
           <p className="text-xl text-gray-300 mb-4">
-            I'm a web developer with a passion for creating innovative, user-friendly websites. Currently, I'm learning new technologies like HTML, CSS, JavaScript, React, and more.
+            I&rsquo;m a web developer with a passion for creating innovative, user-friendly websites. Currently, I&rsquo;m learning new technologies like HTML, CSS, JavaScript, React, and more.
           </p>
           <p className="text-lg text-gray-400">
             I enjoy working on projects that challenge my skills and allow me to explore new trends in technology. My goal is to contribute to impactful projects and help businesses grow through technology.
