@@ -105,7 +105,7 @@ export default function Home() {
             <textarea
               placeholder="Your Message"
               className="w-full p-4 rounded-lg bg-gray-600 text-white placeholder-gray-400"
-              rows="6"
+              rows={6}
               required
             ></textarea>
             <button
