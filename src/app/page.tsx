@@ -1,7 +1,5 @@
 'use client';
 
-// pages/index.js
-
 import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 
@@ -23,7 +21,11 @@ export default function Home() {
           </nav>
           {/* Hamburger menu for small screens */}
           <div className="md:hidden">
-            <button onClick={toggleMenu}>
+            <button
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen ? 'true' : 'false'}
+            >
               {isMenuOpen ? <FiX className="text-white text-3xl" /> : <FiMenu className="text-white text-3xl" />}
             </button>
           </div>
