@@ -1,17 +1,34 @@
-// components/sections/Services.tsx
+"use client";
+
 import services from "@/content/services";
+import { motion } from "framer-motion";
 
 export default function Services() {
   return (
-    <section className="py-20">
-      <div className="container">
-        <h2 className="text-3xl font-semibold mb-8 text-center">What I Offer</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {services.map((service) => (
-            <div key={service.title} className="p-6 rounded-xl bg-muted/20">
-              <h3 className="text-xl font-semibold mb-2">{service.icon} {service.title}</h3>
+    <section className="py-16 md:py-24 bg-background" id="services">
+      <div className="container max-w-4xl mx-auto text-center">
+        <motion.h2
+          className="text-3xl md:text-4xl font-semibold mb-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          What I Do
+        </motion.h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              className="bg-muted/40 rounded-2xl p-6 text-left shadow-sm"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <div className="text-3xl mb-2">{service.icon}</div>
+              <h3 className="text-xl font-semibold mb-1">{service.title}</h3>
               <p className="text-muted-foreground">{service.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
