@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
+import { Button } from "@/components/ui/button"
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => setIsMenuOpen((prevState) => !prevState);
 
   return (
     <div className="font-sans bg-gray-900 text-white min-h-screen flex flex-col">
@@ -22,9 +23,10 @@ export default function Home() {
           {/* Hamburger menu for small screens */}
           <div className="md:hidden">
             <button
+              type="button"
               onClick={toggleMenu}
               aria-label="Toggle menu"
-              aria-expanded={isMenuOpen ? 'true' : 'false'}
+              aria-expanded={isMenuOpen}
             >
               {isMenuOpen ? <FiX className="text-white text-3xl" /> : <FiMenu className="text-white text-3xl" />}
             </button>
@@ -44,6 +46,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center py-20 text-center bg-gradient-to-br from-[#2a4365] to-[#4e73df]">
         <h1 className="text-5xl font-bold mb-4">Welcome to My Personal Website</h1>
+        
         <p className="text-xl mb-8">I&rsquo;m Syed Mir Ahsan Habib, a passionate web developer, entrepreneur, and lifelong learner.</p>
         <a href="#contact" className="px-6 py-3 bg-yellow-400 text-gray-900 rounded-full text-lg hover:bg-yellow-500 transition-all">
           Contact Me
