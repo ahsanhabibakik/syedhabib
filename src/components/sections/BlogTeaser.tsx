@@ -1,27 +1,13 @@
-"use client";
-
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import Link from "next/link";
 
-export default function BlogTeaser() {
-  const blogDir = path.join(process.cwd(), "src/content/blog");
-  const files = fs.readdirSync(blogDir).slice(0, 2); // latest 2 posts
+interface Post {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+}
 
-  const posts = files.map((file) => {
-    const filePath = path.join(blogDir, file);
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    const { data } = matter(fileContent);
-
-    return {
-      slug: file.replace(".md", ""),
-      title: data.title,
-      excerpt: data.excerpt,
-      date: data.date,
-    };
-  });
-
+export default function BlogTeaser({ posts }: { posts: Post[] }) {
   return (
     <section className="py-16 md:py-24 bg-background" id="blog">
       <div className="container max-w-3xl mx-auto text-center">
@@ -39,10 +25,7 @@ export default function BlogTeaser() {
         </div>
 
         <div className="mt-10">
-          <Link
-            href="/blog"
-            className="text-blue-600 hover:underline font-medium"
-          >
+          <Link href="/blog" className="text-blue-600 hover:underline font-medium">
             View all posts →
           </Link>
         </div>

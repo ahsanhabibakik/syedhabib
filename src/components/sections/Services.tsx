@@ -1,6 +1,6 @@
 "use client";
 
-import services from "@/content/services";
+import services, { Service } from "@/services";
 import { motion } from "framer-motion";
 
 export default function Services() {
@@ -17,7 +17,7 @@ export default function Services() {
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-          {services.map((service, index) => (
+          {services.map((service: Service, index: number) => (
             <motion.div
               key={index}
               className="bg-muted/40 rounded-2xl p-6 text-left shadow-sm"

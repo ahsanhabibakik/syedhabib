@@ -14,11 +14,11 @@ export default function About() {
       >
         <h2 className="text-3xl md:text-4xl font-semibold mb-4">About Me</h2>
         <p className="text-muted-foreground text-lg leading-relaxed">
-          I'm <strong>Syed Mir Ahsan Habib</strong> — but most people call me <strong>Akik</strong>.  
-          I’m a digital marketing freelancer who helps local businesses run effective Facebook Ads that get results.  
-          I'm also a beginner web designer, learning by building real projects (like this website!).
+          I&apos;m <strong>Syed Mir Ahsan Habib</strong> — but most people call me <strong>Akik</strong>.  
+          I&apos;m a digital marketing freelancer who helps local businesses run effective Facebook Ads that get results.  
+          I&apos;m also a beginner web designer, learning by building real projects (like this website!).
           <br /><br />
-          Along the way, I’ve co-founded a plant-based brand called <strong>eBrikkho</strong>, and I plan to grow into writing ebooks and blogs about marketing, business, and — yes — even plants.
+          Along the way, I&apos;ve co-founded a plant-based brand called <strong>eBrikkho</strong>, and I plan to grow into writing ebooks and blogs about marketing, business, and — yes — even plants.
           <br /><br />
           This site is my digital garden. Thanks for stopping by. 🌱
         </p>
