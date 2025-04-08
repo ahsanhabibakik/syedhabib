@@ -1,6 +1,6 @@
 "use client";
 
-import projects from "@/content/projects";
+import projects, { Project } from "@/projects";
 import { motion } from "framer-motion";
 
 export default function Projects() {
@@ -17,7 +17,7 @@ export default function Projects() {
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 text-left">
-          {projects.map((project, index) => (
+          {projects.map((project: Project, index: number) => (
             <motion.a
               key={index}
               href={project.link}
