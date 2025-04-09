@@ -50,14 +50,22 @@ body {
 }
 
 article {
-  font-size: 1.1rem;
-  line-height: 1.75;
+  font-size: 1.125rem; /* Slightly bigger for readability */
+  line-height: 1.8;
   color: #333;
 }
 
 h1, h2, h3 {
-  font-weight: 600;
+  font-weight: 700;
   color: #2D3748;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+h2 {
+  margin-top: 1.5rem;
 }
 
 ul {
