@@ -1,3 +1,5 @@
+// src/pages/blog/[slug].tsx
+
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -43,14 +45,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     });
 
   return (
-    <main className="pb-24 flex gap-12">
+    <main className="bg-gray-50 text-gray-800 pb-24 flex gap-12">
       {/* Sticky Table of Contents (TOC) */}
-      <aside className="hidden lg:block sticky top-20 max-w-xs self-start px-4">
-        <h3 className="text-xl font-semibold">Table of Contents</h3>
+      <aside className="hidden lg:block sticky top-20 max-w-xs self-start px-6 py-4 bg-white shadow-lg rounded-lg">
+        <h3 className="text-xl font-semibold mb-4">Table of Contents</h3>
         <ul className="space-y-2 mt-4">
           {headings.map((heading) => (
             <li key={heading.id} className={`pl-${heading.level * 2}`}>
-              <a href={`#${heading.id}`} className="text-gray-900 hover:text-blue-500">
+              <a href={`#${heading.id}`} className="text-gray-900 hover:text-blue-500 transition-all duration-200">
                 {heading.title}
               </a>
             </li>
@@ -59,21 +61,19 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       </aside>
 
       {/* Blog Content */}
-      <section className="flex-1">
+      <section className="flex-1 max-w-4xl mx-auto">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-blue-50 via-white to-slate-100 py-20 mb-12 border-b shadow-sm">
+        <section className="relative bg-gradient-to-br from-blue-50 via-white to-slate-100 py-24 mb-16 border-b shadow-sm">
           <div className="max-w-3xl mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-gray-900">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
               {data.title}
             </h1>
-            <p className="text-muted-foreground text-sm mt-4">
-              {data.date} · 📖 {readingTime} min read
-            </p>
+            <p className="text-gray-600 text-sm mt-2">{data.date} · 📖 {readingTime} min read</p>
           </div>
         </section>
 
         {/* Blog Content */}
-        <article className="prose prose-lg dark:prose-invert max-w-3xl mx-auto px-4 fade-in">
+        <article className="prose prose-lg dark:prose-invert max-w-3xl mx-auto px-6 text-gray-900 leading-relaxed">
           <MDXRemote source={content} />
         </article>
       </section>
