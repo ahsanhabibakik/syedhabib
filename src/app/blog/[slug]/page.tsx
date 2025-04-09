@@ -2,68 +2,46 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
-import { remark } from 'remark';
-import html from 'remark-html';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import './blog-post.css';
 
-type PostParams = {
-  params: {
-    slug: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
+export async function generateStaticParams() {
+  const dir = path.join(process.cwd(), 'src/content/blog');
+  const files = fs.readdirSync(dir);
+  return files.map((file) => ({
+    slug: file.replace(/\.mdx?$/, ''),
+  }));
 }
 
-export async function generateMetadata({ params }: PostParams): Promise<Metadata> {
-  const { slug } = params;
-  const blogDir = path.join(process.cwd(), 'src/content/blog');
-  const filePath = path.join(blogDir, `${slug}.md`);
-  
-  if (!fs.existsSync(filePath)) {
-    return {
-      title: 'Post Not Found',
-    };
-  }
-  
-  const fileContent = fs.readFileSync(filePath, 'utf8');
-  const { data } = matter(fileContent);
-  
-  return {
-    title: data.title,
-    description: data.excerpt,
-  };
-}
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
 
-export default async function BlogPost({ params }: PostParams) {
-  const { slug } = params;
-  const blogDir = path.join(process.cwd(), 'src/content/blog');
-  const filePath = path.join(blogDir, `${slug}.md`);
-  
+  let filePath = path.join(process.cwd(), 'src/content/blog', `${slug}.mdx`);
   if (!fs.existsSync(filePath)) {
-    notFound();
+    filePath = path.join(process.cwd(), 'src/content/blog', `${slug}.md`);
+    if (!fs.existsSync(filePath)) return notFound();
   }
-  
+
   const fileContent = fs.readFileSync(filePath, 'utf8');
-  const { data, content } = matter(fileContent);
-  
-  // Convert markdown to HTML
-  const processedContent = await remark()
-    .use(html)
-    .process(content);
-  const contentHtml = processedContent.toString();
-  
+  const { content, data } = matter(fileContent);
+
   return (
-    <main className="py-20 px-4">
-      <article className="max-w-3xl mx-auto prose dark:prose-invert">
-        <h1>{data.title}</h1>
-        <div className="text-sm text-muted-foreground mb-8">
-          {new Date(data.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
+    <main className="pb-24">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-blue-50 via-white to-slate-100 py-20 mb-12 border-b shadow-sm">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight text-gray-900">
+            {data.title}
+          </h1>
+          <p className="text-muted-foreground text-sm mt-4">{data.date}</p>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+      </section>
+
+      {/* Blog Content */}
+      <article className="prose prose-lg dark:prose-invert max-w-3xl mx-auto px-4 fade-in">
+        <MDXRemote source={content} />
       </article>
     </main>
   );
-} 
+}

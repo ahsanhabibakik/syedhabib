@@ -4,17 +4,11 @@ import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
 
-interface Post {
-  title: string;
-  date: string;
-  slug: string;
-}
-
-const getPosts = async (): Promise<Post[]> => {
+const getPosts = async () => {
   const blogDir = path.join(process.cwd(), 'src/content/blog');
   const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.mdx') || f.endsWith('.md'));
 
-  const posts = files.map((filename) => {
+  return files.map((filename) => {
     const filePath = path.join(blogDir, filename);
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const { data } = matter(fileContent);
@@ -22,29 +16,32 @@ const getPosts = async (): Promise<Post[]> => {
     return {
       title: data.title || filename,
       date: data.date || '',
+      excerpt: data.excerpt || '',
       slug: filename.replace(/\.mdx?$/, ''),
     };
   });
-
-  return posts;
 };
 
 export default async function BlogPage() {
-  const posts: Post[] = await getPosts();
+  const posts = await getPosts();
 
   return (
-    <main className="p-6 max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Blog</h1>
-      <ul>
+    <main className="container py-16 max-w-5xl">
+      <h1 className="text-4xl font-semibold mb-10 text-center">Blog</h1>
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (
-          <li key={post.slug} className="mb-3">
-            <Link href={`/blog/${post.slug}`} className="text-blue-600 hover:underline">
-              {post.title}
-            </Link>
-            <p className="text-sm text-gray-500">{post.date}</p>
-          </li>
+          <Link
+            key={post.slug}
+            href={`/blog/${post.slug}`}
+            className="rounded-2xl border p-5 shadow-sm hover:shadow-md transition-all bg-background"
+          >
+            <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+            <p className="text-muted-foreground text-sm mb-2">{post.date}</p>
+            <p className="text-muted-foreground text-sm">{post.excerpt}</p>
+          </Link>
         ))}
-      </ul>
+      </div>
     </main>
   );
 }

@@ -6,9 +6,9 @@ const siteConfig = {
   url: "https://syedhabib.com",
   email: "syedmirhabib@gmail.com",
   links: {
-    twitter: "https://twitter.com/syedhabib",
-    github: "https://github.com/syedhabib",
-    linkedin: "https://linkedin.com/in/syedhabib",
+    twitter: "https://twitter.com/syedmirhabib",
+    github: "https://github.com/syedmirhabib",
+    linkedin: "https://linkedin.com/in/syedmirhabib",
   },
 };
 
