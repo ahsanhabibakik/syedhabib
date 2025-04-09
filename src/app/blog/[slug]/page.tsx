@@ -6,10 +6,11 @@ import { Metadata } from 'next';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-interface PostParams {
+type PostParams = {
   params: {
     slug: string;
   };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export async function generateMetadata({ params }: PostParams): Promise<Metadata> {
@@ -32,7 +33,7 @@ export async function generateMetadata({ params }: PostParams): Promise<Metadata
   };
 }
 
-export default async function BlogPost({ params }: PostParams) {
+export default async function BlogPost({ params, searchParams }: PostParams) {
   const { slug } = params;
   const blogDir = path.join(process.cwd(), 'src/content/blog');
   const filePath = path.join(blogDir, `${slug}.md`);
