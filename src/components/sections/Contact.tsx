@@ -8,16 +8,16 @@ export default function Contact() {
   return (
     <section className="py-20 bg-muted/50 text-center" id="contact">
       <div className="container max-w-xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-semibold mb-4">Let’s Connect</h2>
+        <h2 className="text-3xl md:text-4xl font-semibold mb-4">Let&apos;s Connect</h2>
         <p className="text-muted-foreground text-lg mb-6">
-          Want to collaborate or have a project in mind? I’d love to hear from you.
+          Want to collaborate or have a project in mind? I&apos;d love to hear from you.
         </p>
 
-        <Button size="lg" asChild>
-          <a href={`mailto:${siteConfig.email}`} className="flex gap-2 items-center">
+        <a href={`mailto:${siteConfig.email}`} className="inline-flex gap-2 items-center">
+          <Button size="lg">
             <Mail size={18} /> {siteConfig.email}
-          </a>
-        </Button>
+          </Button>
+        </a>
       </div>
     </section>
   );
