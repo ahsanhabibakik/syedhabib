@@ -15,8 +15,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
 
   let filePath = path.join(process.cwd(), 'src/content/blog', `${slug}.mdx`);
   if (!fs.existsSync(filePath)) {
