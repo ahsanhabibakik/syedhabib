@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PostParams): Promise<Metadata
   };
 }
 
-export default async function BlogPost({ params, searchParams }: PostParams) {
+export default async function BlogPost({ params }: PostParams) {
   const { slug } = params;
   const blogDir = path.join(process.cwd(), 'src/content/blog');
   const filePath = path.join(blogDir, `${slug}.md`);
