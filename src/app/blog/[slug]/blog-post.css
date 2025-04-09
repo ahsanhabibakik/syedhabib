@@ -5,8 +5,40 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
+}
+
+
+/* Ensure that the TOC sticks to the screen */
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+  max-height: calc(100vh - 20px); /* Keeps the TOC visible while scrolling */
+  overflow-y: auto;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+li a:hover {
+  color: #1e40af; /* Hover effect for links */
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
 }
