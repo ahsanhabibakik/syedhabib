@@ -116,3 +116,26 @@ aside.sticky {
     padding: 0 1rem;
   }
 }
+
+
+
+/* src/app/blog/[slug]/blog-post.css */
+
+.prose {
+  max-width: 100%;
+  font-size: 1rem;
+}
+
+.prose a {
+  color: #0070f3;
+  text-decoration: underline;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  color: #333;
+}
+
+.sticky {
+  position: sticky;
+  top: 20px;
+}

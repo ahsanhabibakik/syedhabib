@@ -1,57 +1,25 @@
+import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { notFound } from 'next/navigation';
 import { remark } from 'remark';
 import html from 'remark-html';
-import BlogPostClient from './BlogPostClient';
 
-interface BlogPostProps {
-  params: {
-    slug: string;
-  };
-}
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const slug = url.searchParams.get('slug'); // Extract slug from query parameters
 
-interface BlogPostData {
-  content: string;
-  data: {
-    title: string;
-    date: string;
-    [key: string]: string;
-  };
-  readingTime: number;
-  headings: {
-    title: string;
-    level: number;
-    id: string;
-  }[];
-}
-
-export async function generateStaticParams() {
-  const dir = path.join(process.cwd(), 'src/content/blog');
-  const files = fs.readdirSync(dir);
-  return files.map((file) => ({
-    slug: file.replace(/\.mdx?$/, ''),
-  }));
-}
-
-export default async function BlogPost({ params }: BlogPostProps) {
-  // Get the blog post data
-  const post = await getPostData(params.slug);
-  
-  if (!post) {
-    notFound();
+  if (!slug) {
+    return NextResponse.json({ error: 'Slug is required' }, { status: 400 });
   }
 
-  return <BlogPostClient post={post} />;
-}
-
-// Server-side function to fetch the blog post data
-async function getPostData(slug: string): Promise<BlogPostData | null> {
+  // Try both .md and .mdx extensions
   let filePath = path.join(process.cwd(), 'src/content/blog', `${slug}.mdx`);
   if (!fs.existsSync(filePath)) {
     filePath = path.join(process.cwd(), 'src/content/blog', `${slug}.md`);
-    if (!fs.existsSync(filePath)) return null;
+    if (!fs.existsSync(filePath)) {
+      return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+    }
   }
 
   const fileContent = fs.readFileSync(filePath, 'utf8');
@@ -59,12 +27,8 @@ async function getPostData(slug: string): Promise<BlogPostData | null> {
 
   // Ensure required properties exist
   if (!rawData.title || !rawData.date) {
-    console.warn(`Blog post ${slug} is missing required frontmatter: title or date`);
-    return null;
+    return NextResponse.json({ error: 'Post is missing required frontmatter' }, { status: 500 });
   }
-
-  // Type assertion to ensure data has the required properties
-  const data = rawData as { title: string; date: string; [key: string]: string };
 
   // Calculate reading time
   const wordsPerMinute = 200;
@@ -89,5 +53,10 @@ async function getPostData(slug: string): Promise<BlogPostData | null> {
   
   const contentHtml = processedContent.toString();
 
-  return { content: contentHtml, data, readingTime, headings };
+  return NextResponse.json({
+    content: contentHtml,
+    data: rawData,
+    readingTime,
+    headings
+  });
 }
