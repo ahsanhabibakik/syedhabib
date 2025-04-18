@@ -35,7 +35,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({ params }: Props) {
+export default async function BlogPost({
+  params,
+}: {
+  params: { slug: string };
+}) {
   // Get the blog post data
   const post = await getPostData(params.slug);
   

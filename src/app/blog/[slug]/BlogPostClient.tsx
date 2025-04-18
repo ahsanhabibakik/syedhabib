@@ -63,7 +63,7 @@ export default function BlogPostClient({ post }: BlogPostProps) {
         window.removeEventListener('scroll', handleScroll);
       };
     }
-  }, [headings]); // Add headings as a dependency
+  }, [headings, handleScroll]); // Add handleScroll as a dependency
 
   return (
     <main className="bg-gray-50 text-gray-800 pb-24 flex gap-12 flex-wrap">
