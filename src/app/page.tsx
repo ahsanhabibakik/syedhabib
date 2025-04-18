@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 export default async function Home() {
   const blogDir = path.join(process.cwd(), "src/content/blog");
@@ -35,6 +36,7 @@ export default async function Home() {
       <BlogTeaser posts={posts} />
       <Contact />
       <Footer />
+      <GoogleTagManager gtmId="	GTM-NLRZDN5P" />
     </>
   );
 }
