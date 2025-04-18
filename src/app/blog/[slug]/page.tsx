@@ -29,11 +29,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({
-  params,
-}: {
+type Props = {
   params: { slug: string };
-}) {
+}
+
+export default async function BlogPost({ params }: Props) {
   // Get the blog post data
   const post = await getPostData(params.slug);
   
