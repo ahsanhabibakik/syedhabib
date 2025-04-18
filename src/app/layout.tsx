@@ -26,10 +26,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <GoogleTagManager gtmId="	GTM-NLRZDN5P" />
+      <head>
+        <GoogleTagManager gtmId="GTM-NLRZDN5P" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NLRZDN5P"
+            height="0"
+            width="0"
+            className="gtm-noscript"
+          />
+        </noscript>
         {children}
       </body>
     </html>

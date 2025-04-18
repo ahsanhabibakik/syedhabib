@@ -8,8 +8,15 @@ body {
 
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
   }
+}
+
+.gtm-noscript {
+  display: none;
+  visibility: hidden;
 }
 
 @layer base {
