@@ -6,12 +6,6 @@ import { remark } from 'remark';
 import html from 'remark-html';
 import BlogPostClient from './BlogPostClient';
 
-// Define the correct types for Next.js 15
-type Props = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
 interface BlogPostData {
   content: string;
   data: {
