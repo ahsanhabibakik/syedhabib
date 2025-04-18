@@ -89,3 +89,8 @@
 
 //   return { content: contentHtml, data, readingTime, headings };
 // }
+
+// Placeholder component to make this a valid module
+export default function BlogPost() {
+  return <div>Blog post page (temporarily disabled)</div>;
+}
