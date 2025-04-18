@@ -6,10 +6,12 @@ import { remark } from 'remark';
 import html from 'remark-html';
 import BlogPostClient from './BlogPostClient';
 
+// Update the interface to match Next.js 15 requirements
 interface BlogPostProps {
   params: {
     slug: string;
   };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 interface BlogPostData {
