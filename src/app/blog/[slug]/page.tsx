@@ -6,13 +6,11 @@ import { remark } from 'remark';
 import html from 'remark-html';
 import BlogPostClient from './BlogPostClient';
 
-// Update the interface to match Next.js 15 requirements
-interface BlogPostProps {
-  params: {
-    slug: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
+// Define the correct types for Next.js 15
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 interface BlogPostData {
   content: string;
@@ -37,7 +35,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({ params }: BlogPostProps) {
+export default async function BlogPost({ params }: Props) {
   // Get the blog post data
   const post = await getPostData(params.slug);
   
