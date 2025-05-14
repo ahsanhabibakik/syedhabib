@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { GoogleTagManager } from '@next/third-parties/google'
+import { Providers } from './providers';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -47,7 +48,9 @@ export default function RootLayout({
             className="gtm-noscript"
           />
         </noscript>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
