@@ -17,9 +17,11 @@ export default function AdminLayout({
 
   useEffect(() => {
     if (status === 'unauthenticated') {
+      router.push('/login');
+    } else if (status === 'authenticated' && session?.user?.role !== 'admin') {
       router.push('/');
     }
-  }, [status, router]);
+  }, [status, session, router]);
 
   if (status === 'loading') {
     return (
@@ -29,7 +31,7 @@ export default function AdminLayout({
     );
   }
 
-  if (!session) {
+  if (!session || session.user?.role !== 'admin') {
     return null;
   }
 

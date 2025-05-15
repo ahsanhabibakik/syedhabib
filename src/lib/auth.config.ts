@@ -18,8 +18,10 @@ export async function getAuthOptions(): Promise<NextAuthOptions> {
     }) as Adapter,
     session: {
       strategy: 'jwt',
+      maxAge: 30 * 24 * 60 * 60, // 30 days
     },
     secret: env.NEXTAUTH_SECRET,
+    debug: process.env.NODE_ENV === 'development',
     providers: [
       GoogleProvider({
         clientId: env.GOOGLE_CLIENT_ID,
@@ -147,7 +149,7 @@ export async function getAuthOptions(): Promise<NextAuthOptions> {
           const newUser = await db.collection('users').insertOne({
             email: user.email,
             name: user.name,
-            role: user.email === 'syedmirhabib@gmail.com' ? 'admin' : 'user',
+            role: (user.email === 'syedmirhabib@gmail.com' || user.email === 'mirakik.habib@gmail.com') ? 'admin' : 'user',
             emailVerified: new Date(),
             createdAt: new Date(),
             updatedAt: new Date(),
@@ -198,6 +200,5 @@ export async function getAuthOptions(): Promise<NextAuthOptions> {
       signIn: '/login',
       error: '/login',
     },
-    debug: true, // Enable debug mode to see more detailed logs
   };
 }

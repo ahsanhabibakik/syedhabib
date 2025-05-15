@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react';
-import { classNames } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost';
@@ -35,7 +35,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     lg: 'px-6 py-3 text-base',
   };
 
-  const buttonClasses = classNames(
+  const buttonClasses = cn(
     baseStyles,
     variants[variant],
     sizes[size],

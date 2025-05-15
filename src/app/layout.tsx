@@ -3,6 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { GoogleTagManager } from '@next/third-parties/google'
 import { Providers } from './providers';
+import { Inter } from 'next/font/google';
+import { SessionProvider } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { getAuthOptions } from '@/lib/auth.config';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,6 +18,8 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: "Syed Mir Ahsan Habib | Portfolio & Projects",
@@ -27,18 +33,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const authOptions = await getAuthOptions();
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en">
       <head>
         <GoogleTagManager gtmId="GTM-NLRZDN5P" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${inter.className}`}
       >
         <noscript>
           <iframe
@@ -48,9 +57,11 @@ export default function RootLayout({
             className="gtm-noscript"
           />
         </noscript>
-        <Providers>
-          {children}
-        </Providers>
+        <SessionProvider session={session}>
+          <Providers>
+            {children}
+          </Providers>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -63,7 +63,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Let's Build Something Amazing Together
+            Let&apos;s Build Something Amazing Together
           </motion.h2>
           <motion.p 
             className="text-muted-foreground text-lg"

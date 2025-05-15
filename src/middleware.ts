@@ -9,6 +9,7 @@ export async function middleware(request: NextRequest) {
   if (
     pathname.startsWith('/api') || 
     pathname === '/login' ||
+    pathname === '/register' ||
     pathname.startsWith('/_next') ||
     pathname.includes('.')
   ) {
@@ -16,7 +17,10 @@ export async function middleware(request: NextRequest) {
   }
 
   // Check if the user is authenticated
-  const token = await getToken({ req: request });
+  const token = await getToken({ 
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET
+  });
   
   // If trying to access admin routes without authentication
   if (pathname.startsWith('/admin') && !token) {

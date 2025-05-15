@@ -160,7 +160,7 @@ export default function LoginPage() {
           <div className="text-sm text-muted-foreground text-center">
             Don&apos;t have an account?{' '}
             <Button
-              variant="link"
+              variant="ghost"
               className="px-0"
               onClick={() => router.push('/register')}
             >
