@@ -2,7 +2,7 @@
 
 'use client';  // Mark this file as client-side
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import './blog-post.css'; // Make sure to include your CSS for styling
 
 interface Heading {
@@ -30,7 +30,7 @@ export default function BlogPostClient({ post }: BlogPostProps) {
   const [activeHeading, setActiveHeading] = useState<string | null>(null);
 
   // Function to handle scroll and update active heading
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     // Don't process if there are no headings
     if (!headings || headings.length === 0) return;
 
@@ -50,7 +50,7 @@ export default function BlogPostClient({ post }: BlogPostProps) {
         setActiveHeading(headings[0].id);
       }
     });
-  };
+  }, [headings]);
 
   // Add scroll event listener with cleanup
   useEffect(() => {

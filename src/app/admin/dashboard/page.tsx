@@ -10,17 +10,9 @@ import {
   DocumentTextIcon, 
   ChartBarIcon, 
   UserGroupIcon,
-  ClockIcon,
-  UserCircleIcon,
-  ArrowUpIcon,
-  ArrowDownIcon
+  ClockIcon
 } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from 'date-fns';
-
-// Utility function to join class names
-function classNames(...classes: (string | undefined | null | boolean)[]): string {
-  return classes.filter(Boolean).join(' ');
-}
 
 interface StatCardProps {
   title: string;

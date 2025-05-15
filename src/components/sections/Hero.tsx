@@ -1,9 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import siteConfig from "@/content/siteConfig";
 import { motion } from "framer-motion";
-import { ArrowRight, Mouse, ArrowDown, Check } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (

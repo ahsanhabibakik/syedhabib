@@ -12,8 +12,8 @@ export default function AboutPage() {
 
       <div className="prose max-w-none">
         <p className="text-lg mb-6">
-          Hello! I'm Syed Mir Ahsan Habib (also known as Syed Mir Habib, Ahsan Habib Akik, or Syed Habib).
-          I'm a passionate developer and tech enthusiast who loves building real-world projects.
+          Hello! I&apos;m Syed Mir Ahsan Habib (also known as Syed Mir Habib, Ahsan Habib Akik, or Syed Habib).
+          I&apos;m a passionate developer and tech enthusiast who loves building real-world projects.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">My Journey</h2>
@@ -33,7 +33,7 @@ export default function AboutPage() {
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">Connect With Me</h2>
         <p className="mb-6">
-          I'm always open to connecting with fellow developers and tech enthusiasts.
+          I&apos;m always open to connecting with fellow developers and tech enthusiasts.
           Feel free to reach out through my social media profiles or email.
         </p>
       </div>

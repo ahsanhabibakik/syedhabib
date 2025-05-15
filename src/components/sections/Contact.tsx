@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle } from "lucide-react";
 import siteConfig from "@/content/siteConfig";
 
 export default function Contact() {
@@ -72,7 +72,7 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             Have a project in mind or want to discuss potential opportunities? 
-            I'm just a message away.
+            I&apos;m just a message away.
           </motion.p>
         </div>
 

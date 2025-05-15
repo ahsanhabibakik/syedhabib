@@ -27,9 +27,6 @@ interface SidebarProps {
   setSidebarOpen: (open: boolean) => void;
 }
 
-// Import the custom session type
-import type { Session } from 'next-auth';
-
 const navigation: NavigationItem[] = [
   { name: 'Dashboard', href: '/admin/dashboard', icon: HomeIcon },
   { name: 'Users', href: '/admin/users', icon: UsersIcon },

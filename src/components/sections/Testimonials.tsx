@@ -71,7 +71,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
           <span className="text-xs text-muted-foreground">via {testimonial.platform}</span>
         </div>
       </div>
-      <p className="text-muted-foreground mb-6 flex-1">"{testimonial.content}"</p>
+      <p className="text-muted-foreground mb-6 flex-1">&quot;{testimonial.content}&quot;</p>
       <div className="mt-auto">
         <div className="font-medium">{testimonial.name}</div>
         <div className="text-sm text-muted-foreground">
@@ -101,7 +101,7 @@ export default function Testimonials() {
             Trusted by Businesses Worldwide
           </h2>
           <p className="text-muted-foreground text-lg">
-            Don't just take our word for it. Here's what our clients have to say about working with us.
+            Don&apos;t just take our word for it. Here&apos;s what our clients have to say about working with us.
           </p>
         </motion.div>
 
@@ -127,7 +127,7 @@ export default function Testimonials() {
           viewport={{ once: true }}
         >
           <p className="text-muted-foreground mb-6">
-            Ready to experience the difference? Let's work together on your next project.
+            Ready to experience the difference? Let&apos;s work together on your next project.
           </p>
           <a 
             href="#contact" 

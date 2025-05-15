@@ -115,13 +115,13 @@ export default function About() {
                 <h3 className="text-3xl font-bold mb-6">Who I Am</h3>
                 <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
                   <p>
-                    I'm <span className="font-medium text-foreground">Syed Mir Ahsan Habib</span>, a results-driven digital strategist and full-stack developer with a passion for creating digital experiences that deliver measurable business impact.
+                    I&apos;m <span className="font-medium text-foreground">Syed Mir Ahsan Habib</span>, a results-driven digital strategist and full-stack developer with a passion for creating digital experiences that deliver measurable business impact.
                   </p>
                   <p>
                     My expertise lies at the intersection of technology and marketing, where I help businesses leverage digital channels to achieve their growth objectives and outpace their competition.
                   </p>
                   <p>
-                    As the co-founder of <span className="font-medium text-foreground">eBrikkho</span>, I've combined my technical expertise with a commitment to sustainability, creating a brand that delivers both environmental and business value.
+                    As the co-founder of <span className="font-medium text-foreground">eBrikkho</span>, I&apos;ve combined my technical expertise with a commitment to sustainability, creating a brand that delivers both environmental and business value.
                   </p>
                 </div>
               </div>
@@ -246,6 +246,10 @@ export default function About() {
               icon={Award}
             />
           </div>
+        </div>
+
+        <div className="text-center max-w-4xl mx-auto mt-20">
+          <p>Don&apos;t hesitate to connect with me on social media or send me an email if you&apos;d like to collaborate or just say hi!</p>
         </div>
       </div>
     </section>

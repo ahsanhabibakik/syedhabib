@@ -6,7 +6,6 @@ import GoogleProvider from 'next-auth/providers/google';
 import { compare } from 'bcryptjs';
 import { Adapter } from 'next-auth/adapters';
 import { env } from './env';
-import { ObjectId } from 'mongodb';
 
 // Create a function to get auth options
 export async function getAuthOptions(): Promise<NextAuthOptions> {

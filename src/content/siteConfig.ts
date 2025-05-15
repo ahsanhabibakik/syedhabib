@@ -1,4 +1,4 @@
-import { Twitter, Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { Twitter, Github, Linkedin, Mail } from 'lucide-react';
 
 interface SocialLink {
   name: string;
