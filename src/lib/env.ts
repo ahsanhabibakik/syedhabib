@@ -35,8 +35,3 @@ export const env = new Proxy(serverEnv, {
     return getEnvVariable(prop as keyof typeof serverEnv);
   },
 }) as typeof serverEnv;
-
-export const env = {
-  ...serverEnv,
-  ...publicEnv,
-};
