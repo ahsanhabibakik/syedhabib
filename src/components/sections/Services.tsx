@@ -80,7 +80,7 @@ export default function Services() {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <p className="text-muted-foreground mb-6">
-            Have a project in mind? Let's discuss how I can help you achieve your goals.
+            Have a project in mind? Let&apos;s discuss how I can help you achieve your goals.
           </p>
           <a 
             href="#contact" 

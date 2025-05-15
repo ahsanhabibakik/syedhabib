@@ -71,7 +71,7 @@ export default function ServicesPage() {
       <div className="mt-12 text-center">
         <h2 className="text-2xl font-semibold mb-4">Interested in working together?</h2>
         <p className="mb-6">
-          Let's discuss how I can help with your next project or challenge.
+          Let&apos;s discuss how I can help with your next project or challenge.
         </p>
         <a 
           href="mailto:contact@syedhabib.com" 
