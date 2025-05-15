@@ -132,7 +132,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                       </li>
                       <li className="mt-auto">
                         <button
-                          onClick={() => signOut({ callbackUrl: '/admin/login' })}
+                          onClick={() => signOut({ callbackUrl: '/' })}
                           className="group -mx-2 flex w-full items-center gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
                         >
                           <ArrowRightOnRectangleIcon
@@ -206,7 +206,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                     Logged in as {user?.email || 'admin@example.com'}
                   </div>
                   <button
-                    onClick={() => signOut({ callbackUrl: '/admin/login' })}
+                    onClick={() => signOut({ callbackUrl: '/' })}
                     className="group -mx-2 mt-2 flex w-full items-center gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
                   >
                     <ArrowRightOnRectangleIcon

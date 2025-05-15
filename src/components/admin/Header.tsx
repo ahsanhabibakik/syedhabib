@@ -75,7 +75,7 @@ export default function Header({ setSidebarOpen }: HeaderProps) {
                 <Menu.Item>
                   {({ active }) => (
                     <button
-                      onClick={() => signOut({ callbackUrl: '/admin/login' })}
+                      onClick={() => signOut({ callbackUrl: '/' })}
                       className={classNames(
                         active ? 'bg-gray-50' : '',
                         'block w-full px-3 py-1 text-left text-sm leading-6 text-gray-900'

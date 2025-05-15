@@ -4,6 +4,8 @@ const serverEnv = {
   NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:3000',
   MONGODB_URI: process.env.MONGODB_URI,
   NODE_ENV: process.env.NODE_ENV || 'development',
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 } as const;
 
 // Public (client-side) environment variables
@@ -33,3 +35,8 @@ export const env = new Proxy(serverEnv, {
     return getEnvVariable(prop as keyof typeof serverEnv);
   },
 }) as typeof serverEnv;
+
+export const env = {
+  ...serverEnv,
+  ...publicEnv,
+};

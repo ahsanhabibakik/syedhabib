@@ -5,19 +5,33 @@ import type { NextRequest } from 'next/server';
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
-  // Allow access to the login page and API routes
-  if (pathname.startsWith('/admin/login') || pathname.startsWith('/api')) {
+  // Allow access to API routes, login page, and public assets
+  if (
+    pathname.startsWith('/api') || 
+    pathname === '/login' ||
+    pathname.startsWith('/_next') ||
+    pathname.includes('.')
+  ) {
     return NextResponse.next();
   }
 
   // Check if the user is authenticated
   const token = await getToken({ req: request });
   
-  // If not authenticated, redirect to login
-  if (!token) {
-    const loginUrl = new URL('/admin/login', request.url);
-    loginUrl.searchParams.set('callbackUrl', pathname);
-    return NextResponse.redirect(loginUrl);
+  // If trying to access admin routes without authentication
+  if (pathname.startsWith('/admin') && !token) {
+    const url = new URL('/login', request.url);
+    url.searchParams.set('callbackUrl', pathname);
+    return NextResponse.redirect(url);
+  }
+
+  // If authenticated and trying to access admin routes
+  if (pathname.startsWith('/admin') && token) {
+    // Check if user has admin role
+    if (token.role !== 'admin') {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+    return NextResponse.next();
   }
 
   return NextResponse.next();
@@ -25,8 +39,13 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/admin',
-    '/admin/dashboard/:path*',
-    // Add other protected admin routes here
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };
