@@ -6,13 +6,14 @@ import GoogleProvider from 'next-auth/providers/google';
 import { compare } from 'bcryptjs';
 import { Adapter } from 'next-auth/adapters';
 import { env } from './env';
+import { ObjectId } from 'mongodb';
 
 // Create a function to get auth options
 export async function getAuthOptions(): Promise<NextAuthOptions> {
   const client = await clientPromise;
   
   return {
-    // @ts-ignore - MongoDBAdapter has type issues
+    // @ts-expect-error - MongoDBAdapter has type issues with Next.js 13+
     adapter: MongoDBAdapter(client, {
       databaseName: 'ebrikkho_next_db'
     }) as Adapter,
@@ -55,9 +56,20 @@ export async function getAuthOptions(): Promise<NextAuthOptions> {
               throw new Error('No user found with this email');
             }
 
+            // Check if the user has a password
             if (!user.password) {
-              console.log('User has no password set');
-              throw new Error('Please sign in with Google');
+              console.log('User has no password set:', user.email);
+              // Check if the user has a Google account
+              const hasGoogleAccount = await db.collection('accounts').findOne({
+                userId: user._id,
+                provider: 'google'
+              });
+              
+              if (hasGoogleAccount) {
+                throw new Error('This account is linked to Google. Please sign in with Google.');
+              } else {
+                throw new Error('Account not properly set up. Please contact support.');
+              }
             }
 
             console.log('Comparing passwords for user:', user.email);
@@ -87,10 +99,12 @@ export async function getAuthOptions(): Promise<NextAuthOptions> {
       async signIn({ user, account, profile }) {
         if (account?.provider === 'google') {
           const db = client.db();
+          
+          // Check if there's an existing user with this email
           const existingUser = await db.collection('users').findOne({ email: user.email });
           
           if (existingUser) {
-            // Update the existing user with Google account info
+            // If the user exists, update their account with Google info
             await db.collection('users').updateOne(
               { email: user.email },
               {
@@ -99,16 +113,39 @@ export async function getAuthOptions(): Promise<NextAuthOptions> {
                   emailVerified: new Date(),
                   updatedAt: new Date(),
                   googleId: profile?.sub,
-                  // Keep the existing role and password
+                  // Keep existing role
                   role: existingUser.role || 'user',
                 }
               }
             );
+
+            // Also update the accounts collection to link the Google account
+            await db.collection('accounts').updateOne(
+              { 
+                userId: existingUser._id,
+                provider: 'google'
+              },
+              {
+                $set: {
+                  type: 'oauth',
+                  provider: 'google',
+                  providerAccountId: profile?.sub,
+                  access_token: account.access_token,
+                  expires_at: account.expires_at,
+                  token_type: account.token_type,
+                  scope: account.scope,
+                  id_token: account.id_token,
+                  session_state: account.session_state,
+                }
+              },
+              { upsert: true }
+            );
+
             return true;
           }
 
-          // Create new user with admin role if it's your email
-          await db.collection('users').insertOne({
+          // For new users, create both user and account records
+          const newUser = await db.collection('users').insertOne({
             email: user.email,
             name: user.name,
             role: user.email === 'syedmirhabib@gmail.com' ? 'admin' : 'user',
@@ -117,6 +154,22 @@ export async function getAuthOptions(): Promise<NextAuthOptions> {
             updatedAt: new Date(),
             googleId: profile?.sub,
           });
+
+          // Create the account record
+          await db.collection('accounts').insertOne({
+            userId: newUser.insertedId,
+            type: 'oauth',
+            provider: 'google',
+            providerAccountId: profile?.sub,
+            access_token: account.access_token,
+            expires_at: account.expires_at,
+            token_type: account.token_type,
+            scope: account.scope,
+            id_token: account.id_token,
+            session_state: account.session_state,
+          });
+
+          return true;
         }
         return true;
       },
