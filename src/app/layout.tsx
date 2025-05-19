@@ -4,7 +4,6 @@ import "./globals.css";
 import { GoogleTagManager } from '@next/third-parties/google'
 import { Providers } from './providers';
 import { Inter } from 'next/font/google';
-import { SessionProvider } from 'next-auth/react';
 import { getServerSession } from 'next-auth';
 import { getAuthOptions } from '@/lib/auth.config';
 
@@ -57,11 +56,9 @@ export default async function RootLayout({
             className="gtm-noscript"
           />
         </noscript>
-        <SessionProvider session={session}>
-          <Providers>
-            {children}
-          </Providers>
-        </SessionProvider>
+        <Providers session={session}>
+          {children}
+        </Providers>
       </body>
     </html>
   );

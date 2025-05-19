@@ -12,7 +12,6 @@ export async function getAuthOptions(): Promise<NextAuthOptions> {
   const client = await clientPromise;
   
   return {
-    // @ts-expect-error - MongoDBAdapter has type issues with Next.js 13+
     adapter: MongoDBAdapter(client, {
       databaseName: 'ebrikkho_next_db'
     }) as Adapter,

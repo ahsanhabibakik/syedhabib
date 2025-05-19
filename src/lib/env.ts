@@ -1,11 +1,11 @@
 // Server-side environment variables
 const serverEnv = {
-  NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+  NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || '',
   NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:3000',
-  MONGODB_URI: process.env.MONGODB_URI,
+  MONGODB_URI: process.env.MONGODB_URI || '',
   NODE_ENV: process.env.NODE_ENV || 'development',
-  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || '',
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET || '',
 } as const;
 
 // Public (client-side) environment variables
@@ -26,7 +26,7 @@ export function getEnvVariable(key: keyof typeof serverEnv): string {
     console.error(`❌ Environment variable ${key} is not set`);
     throw new Error(`Environment variable ${key} is not set`);
   }
-  return value || '';
+  return value;
 }
 
 // Export server environment with type safety
