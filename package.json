@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "cross-env NODE_OPTIONS=--no-warnings next build",
     "start": "next start",
     "lint": "next lint",
     "add-admin": "node scripts/addAdminUser.js"
